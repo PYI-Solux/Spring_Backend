@@ -4,6 +4,7 @@ import com.solux.pyi.pyiplanyouridea.folders.domain.Folders;
 import com.solux.pyi.pyiplanyouridea.folders.repository.FoldersRepository;
 import com.solux.pyi.pyiplanyouridea.memos.dto.*;
 import com.solux.pyi.pyiplanyouridea.memos.service.MemosService;
+import com.solux.pyi.pyiplanyouridea.summary.domain.Summary;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -98,5 +99,13 @@ public class MemosController {
     @GetMapping("/ideas/{memoUuid}")
     public IdeasListResponseDto getIdeasList(@PathVariable Long memoUuid) {
         return memosService.getIdeasById(memoUuid);
+    }
+
+
+
+    // 작성완료 후 페이지 조회
+    @GetMapping("/summary/{memoUuid}")
+    public SummaryListResponseDto getSummaryList(@PathVariable Long memoUuid) {
+        return memosService.getSummaryById(memoUuid);
     }
 }

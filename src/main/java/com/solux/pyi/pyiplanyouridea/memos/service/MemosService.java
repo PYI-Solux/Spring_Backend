@@ -145,6 +145,16 @@ public class MemosService {
 
         return new IdeasListResponseDto(entity);
     }
+
+
+
+    // 작성완료 후 페이지 조회
+    @Transactional
+    public SummaryListResponseDto getSummaryById(Long memoUuid){
+        Memos entity = memosRepository.findById(memoUuid)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. memoUuid = " + memoUuid));
+        return new SummaryListResponseDto(entity);
+    }
 }
 
 // 서비스에서 만든 delete 메소드를
