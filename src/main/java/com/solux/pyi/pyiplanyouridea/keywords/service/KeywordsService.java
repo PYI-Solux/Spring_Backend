@@ -5,6 +5,7 @@ import com.solux.pyi.pyiplanyouridea.keywords.domain.KeywordsRepository;
 import com.solux.pyi.pyiplanyouridea.keywords.dto.KeywordsResponseDto;
 import com.solux.pyi.pyiplanyouridea.keywords.dto.KeywordsSaveRequestDto;
 import com.solux.pyi.pyiplanyouridea.keywords.dto.KeywordsUpdateRequestDto;
+import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,11 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class KeywordsService {
     private final KeywordsRepository keywordsRepository;
 
+    // 키워드 저장
     @Transactional
-    public Long save(KeywordsSaveRequestDto requestDto){
-        return keywordsRepository.save(requestDto.toEntity()).getKeyword_id();
+    public Long save(Memos memoUuid, KeywordsSaveRequestDto requestDto){
+        return keywordsRepository.save(requestDto.toEntity(memoUuid)).getKeyword_id();
     }
 
+    // 키워드 수정
     @Transactional
     public Long update(Long id, KeywordsUpdateRequestDto requestDto){
         Keywords keywords = keywordsRepository.findById(id)
@@ -33,6 +36,7 @@ public class KeywordsService {
         return new KeywordsResponseDto(entity);
     }
 
+    // 키워드 삭제
     @Transactional
     public void delete(Long id){
         Keywords keywords = keywordsRepository.findById(id)

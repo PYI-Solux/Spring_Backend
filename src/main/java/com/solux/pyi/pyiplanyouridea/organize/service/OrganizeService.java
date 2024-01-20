@@ -1,5 +1,6 @@
 package com.solux.pyi.pyiplanyouridea.organize.service;
 
+import com.solux.pyi.pyiplanyouridea.memos.domain.Memos;
 import com.solux.pyi.pyiplanyouridea.organize.domain.Organize;
 import com.solux.pyi.pyiplanyouridea.organize.domain.OrganizeRepository;
 import com.solux.pyi.pyiplanyouridea.organize.dto.OrganizeResponseDto;
@@ -15,8 +16,8 @@ public class OrganizeService {
     private final OrganizeRepository organizeRepository;
 
     @Transactional
-    public Long save(OrganizeSaveRequestDto requestDto){
-        return organizeRepository.save(requestDto.toEntity()).getOrganize_id();
+    public Long save(Memos memoUuid, OrganizeSaveRequestDto requestDto){
+        return organizeRepository.save(requestDto.toEntity(memoUuid)).getOrganize_id();
     }
 
     @Transactional
