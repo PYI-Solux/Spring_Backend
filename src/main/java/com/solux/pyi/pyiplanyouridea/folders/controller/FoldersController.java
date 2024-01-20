@@ -1,11 +1,15 @@
 package com.solux.pyi.pyiplanyouridea.folders.controller;
 
+import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersListResponseDto;
+import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersResponseDto;
 import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersSaveRequestDto;
 import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersUpdateRequestDto;
 import com.solux.pyi.pyiplanyouridea.folders.service.FoldersService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Getter
@@ -16,8 +20,17 @@ public class FoldersController {
     @PostMapping("https://planyouridea/category/createfolder")
     public Long save(@RequestBody FoldersSaveRequestDto requestDto) { return foldersService.save(requestDto); }
 
-    // 폴더 리스트 조회
-    //@GetMapping("https://planyouridea/category")
+    // 카테고리에서 폴더 리스트 조회
+    @GetMapping("https://planyouridea/category")
+    public List<FoldersListResponseDto> getCategoryFoldersList(){
+        return foldersService.findAllDesc();
+    }
+
+    // 메인 페이지에서 전체 폴더 리스트 조회
+    @GetMapping("https://planyouridea/main")
+    public List<FoldersListResponseDto> getMainpageFoldersList(){
+        return foldersService.findAllDesc();
+    }
 
     // 폴더 하나 이름 수정
     @PutMapping("https://planyouridea/category/editfoldername/{folderId}")
