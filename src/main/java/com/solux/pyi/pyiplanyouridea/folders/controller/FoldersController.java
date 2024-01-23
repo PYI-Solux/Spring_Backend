@@ -5,6 +5,8 @@ import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersResponseDto;
 import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersSaveRequestDto;
 import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersUpdateRequestDto;
 import com.solux.pyi.pyiplanyouridea.folders.service.FoldersService;
+import com.solux.pyi.pyiplanyouridea.users.domain.Users;
+import com.solux.pyi.pyiplanyouridea.users.repository.UsersRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +17,13 @@ import java.util.List;
 @Getter
 public class FoldersController {
     private final FoldersService foldersService;
+    private final UsersRepository usersRepository;
 
     // 폴더 하나 생성
     @PostMapping("https://planyouridea/category/createfolder")
-    public Long save(@RequestBody FoldersSaveRequestDto requestDto) { return foldersService.save(requestDto); }
+    public Long save(@PathVariable Long userUuid, @RequestBody FoldersSaveRequestDto requestDto) {
+        Users users = usersRepository.getReferenceById(userUuid);
+        return foldersService.save(users, requestDto); }
 
     // 카테고리에서 폴더 리스트 조회
     @GetMapping("https://planyouridea/category")

@@ -47,9 +47,9 @@ public class Folders {
     @Column(name = "folder_uuid", columnDefinition = "bigint(16)", nullable = false)
     private Long folderUuid;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_uuid", columnDefinition = "bigint(16)", nullable = false)
-//    private Users userUuid;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_uuid", columnDefinition = "bigint(16)", nullable = false)
+    private Users userUuid;
 
     @Column(name = "folder_name", columnDefinition = "varchar(30)", nullable = false)
     private String folderName;
@@ -59,8 +59,8 @@ public class Folders {
     private LocalDateTime folderCreated;
 
     @Builder
-    public Folders(String folderName, LocalDateTime folderCreated){
-        //this.userUuid = userUuid;
+    public Folders(Users userUuid, String folderName, LocalDateTime folderCreated){
+        this.userUuid = userUuid;
         this.folderName = folderName;
         this.folderCreated = folderCreated;
     }

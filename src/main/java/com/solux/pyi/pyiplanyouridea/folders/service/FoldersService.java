@@ -6,6 +6,7 @@ import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersListResponseDto;
 import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersResponseDto;
 import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersSaveRequestDto;
 import com.solux.pyi.pyiplanyouridea.folders.dto.FoldersUpdateRequestDto;
+import com.solux.pyi.pyiplanyouridea.users.domain.Users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +21,8 @@ public class FoldersService {
 
     // 폴더 하나 생성
     @Transactional
-    public Long save(FoldersSaveRequestDto requestDto){
-        return foldersRepository.save(requestDto.toEntity()).getFolderUuid();
+    public Long save(Users userUuid, FoldersSaveRequestDto requestDto){
+        return foldersRepository.save(requestDto.toEntity(userUuid)).getFolderUuid();
     }
 
     // 폴더 하나 이름 수정
