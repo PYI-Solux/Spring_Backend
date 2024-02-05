@@ -116,15 +116,28 @@ public class UsersController {
 //    }
     @PostMapping("/login")
     public LoginResponseDto login(@RequestBody LoginRequestDto loginRequestDto) {
+    //public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto) {
 
-        String userId = loginRequestDto.getUserId();
-        String password = loginRequestDto.getPassword();
+//        String userId = loginRequestDto.getUserId();
+//        String password = loginRequestDto.getPassword();
 
-        if (userId == null || password == null || userId.isEmpty() || password.isEmpty()) {
-            return null;
-        }
+//        if (userId == null || password == null || userId.isEmpty() || password.isEmpty()) {
+//            return null;
+//        }
 
         return usersService.login(loginRequestDto);
+
+//        if (userId == null || password == null || userId.isEmpty() || password.isEmpty()) {
+//            return ResponseEntity.badRequest().body("아이디와 비밀번호를 입력하세요.");
+//        }
+//
+//        Users user = usersService.login(loginRequestDto);
+//
+//        if (user != null) {
+//            return ResponseEntity.ok("로그인에 성공하였습니다.");
+//        } else {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인에 실패하였습니다. 아이디 또는 비밀번호를 확인하세요.");
+//        }
     }
 
     // 로그아웃

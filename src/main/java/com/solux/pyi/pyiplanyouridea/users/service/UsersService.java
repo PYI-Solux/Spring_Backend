@@ -79,12 +79,12 @@ public class UsersService implements UserDetailsService {
 //    }
     public LoginResponseDto login(LoginRequestDto loginRequestDto) {
         Users users = usersRepository.findByUserId(loginRequestDto.getUserId())
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException("해당 users가 없습니다. userId = " + loginRequestDto.getUserId()));
 
-        // userId 존재X or password 일치X
-        if (users == null || !encoder.matches(loginRequestDto.getPassword(), users.getPassword())) {
-            return null;
-        }
+//        // userId 존재X or password 일치X
+//        if (users == null || !encoder.matches(loginRequestDto.getPassword(), users.getPassword())) {
+//            return null;
+//        }
 
         // userId와 password가 일치할 경우
         return new LoginResponseDto(users);
